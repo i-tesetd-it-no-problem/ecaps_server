@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 import ssl
 import os
@@ -20,10 +20,15 @@ async def test_endpoint():
 
 
 @app.post("/submit")
-async def submit_endpoint(data: SubmitRequest):
+async def submit_endpoint(data: SubmitRequest, request: Request):
+    # 打印接收到的POST请求数据
+    print("Received POST data:", await request.json())
+
     # 检查数据并返回结果
     if not data.param1 or not data.param2:
         raise HTTPException(status_code=400, detail="Invalid request data")
+
+    # 返回数据
     return {"message": "POST request received successfully", "data": data.dict()}
 
 
