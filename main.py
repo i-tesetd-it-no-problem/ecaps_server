@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 import ssl
 import os
 from uvicorn.config import Config
@@ -7,9 +8,23 @@ from uvicorn.server import Server
 app = FastAPI()  # 创建 FastAPI 应用实例
 
 
+# 定义 POST 请求的数据模型
+class SubmitRequest(BaseModel):
+    param1: str
+    param2: str
+
+
 @app.get("/test")
 async def test_endpoint():
     return {"message": "Mutual TLS connection successful"}
+
+
+@app.post("/submit")
+async def submit_endpoint(data: SubmitRequest):
+    # 检查数据并返回结果
+    if not data.param1 or not data.param2:
+        raise HTTPException(status_code=400, detail="Invalid request data")
+    return {"message": "POST request received successfully", "data": data.dict()}
 
 
 if __name__ == "__main__":
@@ -25,7 +40,7 @@ if __name__ == "__main__":
             print(f"Error: 文件未找到 - {file_path}")
             exit(1)
 
-    # 创建 Uvicorn 对象
+    # 创建 Uvicorn 配置对象
     config = Config(
         app=app,  # 指定 FastAPI 应用实例
         host="0.0.0.0",
@@ -36,5 +51,6 @@ if __name__ == "__main__":
         ssl_cert_reqs=ssl.CERT_REQUIRED,  # 双向 TLS 认证
     )
 
+    # 创建并运行 Uvicorn 服务器
     server = Server(config)
     server.run()
