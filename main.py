@@ -35,7 +35,7 @@ if __name__ == "__main__":  # 判断是否作为主程序运行
     config = Config(
         app=app,  # 指定 FastAPI 应用实例
         host="0.0.0.0",  # 服务器监听的主机地址，0.0.0.0 表示监听所有可用接口
-        port=8000,  # 服务器监听的端口号
+        port=8001,  # 服务器监听的端口号
         ssl_certfile=cert_file,  # 指定服务器证书文件
         ssl_keyfile=key_file,  # 指定服务器私钥文件
         ssl_ca_certs=ca_file,  # 指定用于验证客户端证书的 CA 证书文件
