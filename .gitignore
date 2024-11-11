@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+ssl_cfg
 .idea
 build/
 develop-eggs/
