@@ -29,7 +29,7 @@ async def submit_endpoint(data: SubmitRequest, request: Request):
         raise HTTPException(status_code=400, detail="Invalid request data")
 
     # 返回数据
-    return {"message": "POST request received successfully", "data": data.dict()}
+    return {"msg": "post successful"}
 
 
 if __name__ == "__main__":
