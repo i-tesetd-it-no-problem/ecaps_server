@@ -112,9 +112,9 @@ async def submit_sensor_data(sensor_data: SensorData, request: Request):
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    cert_file = os.path.join(script_dir, "ssl_cfg", "server.crt")  # 服务器证书文件路径
-    key_file = os.path.join(script_dir, "ssl_cfg", "server.key")  # 服务器私钥文件路径
-    ca_file = os.path.join(script_dir, "ssl_cfg", "ca.pem")  # CA 证书文件路径
+    cert_file = os.path.join(script_dir, "ssl_cfg", "ssl_cfg", "server.crt")  # 服务器证书文件路径
+    key_file = os.path.join(script_dir, "ssl_cfg", "ssl_cfg", "server.key")  # 服务器私钥文件路径
+    ca_file = os.path.join(script_dir, "ssl_cfg", "ssl_cfg", "ca.pem")  # CA 证书文件路径
 
     # 检查证书文件是否存在
     for file_path in [cert_file, key_file, ca_file]:  # 遍历所有证书文件路径
