@@ -14,6 +14,26 @@ app = FastAPI()  # 创建 FastAPI 应用实例
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("sensor_api")
 
+###########################测试###########################
+
+@app.get("/test")
+async def test_endpoint():
+    logger.info("Test endpoint accessed")
+    return {"message": "Mutual TLS connection successful"}
+
+# 定义 POST 请求的数据模型
+class SubmitRequest(BaseModel):
+    param1: str
+    param2: str
+
+@app.post("/submit")
+async def submit_endpoint(data: SubmitRequest):
+    # 检查数据并返回结果
+    if not data.param1 or not data.param2:
+        raise HTTPException(status_code=400, detail="Invalid request data")
+    return {"message": "POST request received successfully", "data": data.model_dump()}
+
+###########################测试###########################
 
 # 电压电流传感器
 class Lmv358Sensor(BaseModel):
@@ -65,12 +85,6 @@ class SensorData(BaseModel):
 # 定义 POST 请求的数据模型（可选，如果需要额外字段）
 class SubmitSensorRequest(BaseModel):
     data: SensorData
-
-
-@app.get("/test")
-async def test_endpoint():
-    logger.info("Test endpoint accessed")
-    return {"message": "Mutual TLS connection successful"}
 
 
 @app.post("/submit_sensor_data")
