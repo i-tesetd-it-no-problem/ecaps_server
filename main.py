@@ -82,7 +82,7 @@ class SensorData(BaseModel):
     max30102: Max30102Sensor
 
 
-# 定义 POST 请求的数据模型(可选，如果需要额外字段)
+# 定义 POST 请求的数据模型(可选,如果需要额外字段)
 class SubmitSensorRequest(BaseModel):
     data: SensorData
 
@@ -97,7 +97,7 @@ async def submit_sensor_data(sensor_data: SensorData, request: Request):
         data_time = datetime.fromtimestamp(sensor_data.timestamp)
         logger.info(f"Data timestamp: {data_time.isoformat()}")
 
-        # 这里可以添加更多的处理逻辑，例如存储数据到数据库
+        # 这里可以添加更多的处理逻辑,例如存储数据到数据库
 
         # 返回成功响应
         return {"msg": "Sensor data received successfully"}
