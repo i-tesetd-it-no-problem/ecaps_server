@@ -82,7 +82,7 @@ class SensorData(BaseModel):
     max30102: Max30102Sensor
 
 
-# 定义 POST 请求的数据模型（可选，如果需要额外字段）
+# 定义 POST 请求的数据模型(可选，如果需要额外字段)
 class SubmitSensorRequest(BaseModel):
     data: SensorData
 
